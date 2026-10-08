@@ -1,0 +1,11 @@
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.springframework.kafka: WARN
+    org.testcontainers: WARN
+    com.github.dockerjava: WARN
+
+spring:
+  kafka:
+    properties:
+      schema.registry.url: mock://order-tracking

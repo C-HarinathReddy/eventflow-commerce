@@ -1,0 +1,12 @@
+# Shared by every application pod. Spring Boot reads these as relaxed-binding property overrides.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  SPRING_KAFKA_PROPERTIES_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+  # Paketo's memory calculator sizes the heap from the container limit minus fixed regions. Its
+  # defaults (250 thread stacks, 240 MiB code cache) do not fit a small pod, so shrink them here.
+  BPL_JVM_THREAD_COUNT: "50"
+  JAVA_TOOL_OPTIONS: -XX:ReservedCodeCacheSize=64M -XX:+UseSerialGC -XX:TieredStopAtLevel=1
